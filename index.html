@@ -6,65 +6,160 @@
 <title>🎂 HAPPY BIRTHDAY CÔ</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
-body{overflow:hidden;background:black;color:white;}
-
-.flash{
-position:fixed;width:100%;height:100%;
-background:white;opacity:0;z-index:999;transition:.3s;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Segoe UI,sans-serif;
 }
 
-.page{
-height:100vh;display:flex;justify-content:center;align-items:center;
-flex-direction:column;text-align:center;
-background:radial-gradient(circle,#1d0036,#000814,#000);
-padding:20px;
-}
-
-input{
-padding:14px;border:none;border-radius:50px;
-font-size:18px;text-align:center;width:260px;
-}
-
-button{
-margin-top:18px;padding:14px 28px;border:none;
-border-radius:50px;font-size:18px;font-weight:bold;
-cursor:pointer;background:linear-gradient(90deg,#ff00cc,#00ffff);
+body{
+overflow:hidden;
+background:black;
 color:white;
 }
 
-#musicBtn{
-position:fixed;top:20px;right:20px;
-z-index:9999;border-radius:30px;padding:8px 14px;
-background:linear-gradient(90deg,#ff00cc,#00ffff);
-color:white;cursor:pointer;
+/* flash */
+.flash{
+position:fixed;
+width:100%;
+height:100%;
+background:white;
+opacity:0;
+pointer-events:none;
+z-index:100;
+transition:.3s;
 }
 
+/* page */
+.page{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+background:radial-gradient(circle at center,#1d0036,#000814,#000);
+padding:20px;
+}
+
+/* input */
+input{
+padding:14px;
+border:none;
+border-radius:50px;
+font-size:18px;
+text-align:center;
+width:260px;
+outline:none;
+position:relative;
+z-index:200;
+}
+
+/* button */
+button{
+margin-top:18px;
+padding:14px 28px;
+border:none;
+border-radius:50px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+background:linear-gradient(90deg,#ff00cc,#00ffff);
+color:white;
+box-shadow:0 0 15px rgba(255,255,255,.3);
+}
+
+/* nút nhạc */
+#musicBtn{
+position:fixed;
+top:15px;
+right:15px;
+z-index:300;
+padding:8px 14px;
+font-size:13px;
+border-radius:30px;
+}
+
+/* text */
 .birthday{
-font-size:70px;
-animation:showUp 2s forwards;
+font-size:68px;
 text-shadow:0 0 20px #ff00cc,0 0 40px #00ffff;
+animation:showUp 2s forwards;
 }
 
 .msg{
-margin-top:20px;font-size:22px;line-height:1.8;
+margin-top:25px;
+font-size:23px;
+line-height:1.8;
 text-shadow:0 0 10px cyan;
+max-width:900px;
 }
 
 @keyframes showUp{
-0%{opacity:0;transform:scale(.2)}
+0%{opacity:0;transform:scale(.3)}
 100%{opacity:1;transform:scale(1)}
 }
 
-/* hiệu ứng */
-.star{position:fixed;width:2px;height:2px;background:white;}
-.heart{position:fixed;bottom:-30px;animation:fly 7s linear;}
-.balloon{position:fixed;bottom:-120px;width:60px;height:75px;border-radius:50%;animation:balloonFly 10s linear;}
-.boom{position:fixed;font-size:24px;animation:explode 1.3s;}
+/* stars */
+.star{
+position:fixed;
+width:2px;
+height:2px;
+background:white;
+animation:twinkle 2s infinite alternate;
+}
 
-@keyframes fly{100%{transform:translateY(-120vh)}}
-@keyframes balloonFly{100%{transform:translateY(-130vh)}}
-@keyframes explode{100%{transform:scale(4);opacity:0}}
+@keyframes twinkle{
+0%{opacity:.2}
+100%{opacity:1}
+}
+
+/* hearts */
+.heart{
+position:fixed;
+bottom:-30px;
+animation:fly 7s linear forwards;
+}
+
+@keyframes fly{
+100%{transform:translateY(-120vh)}
+}
+
+/* balloons */
+.balloon{
+position:fixed;
+bottom:-120px;
+width:60px;
+height:75px;
+border-radius:50%;
+animation:balloonFly 10s linear forwards;
+}
+
+.balloon::after{
+content:"";
+position:absolute;
+width:2px;
+height:70px;
+background:white;
+left:50%;
+top:75px;
+}
+
+@keyframes balloonFly{
+100%{transform:translateY(-130vh)}
+}
+
+/* pháo hoa */
+.boom{
+position:fixed;
+font-size:24px;
+animation:explode 1.3s forwards;
+}
+
+@keyframes explode{
+100%{transform:scale(4);opacity:0}
+}
 </style>
 </head>
 
@@ -72,14 +167,18 @@ text-shadow:0 0 10px cyan;
 
 <div class="flash" id="flash"></div>
 
+<!-- trang nhập mật khẩu -->
 <div class="page" id="main">
-<h1>🔐 Nhập Mã Bí Mật</h1><br>
-<input type="password" id="pin">
+<h1>🔐 Nhập Mã Bí Mật</h1>
+<br>
+<input type="password" id="pin" placeholder="Nhập mật khẩu...">
 <button onclick="check()">Mở Thiệp 🎁</button>
 </div>
 
+<!-- trang thiệp -->
 <div class="page" id="secret" style="display:none;">
 <h1 class="birthday">🎂 HAPPY BIRTHDAY 🎂</h1>
+
 <div class="msg">
 Chúc mừng sinh nhật cô 🌷<br>
 Chúc cô luôn mạnh khỏe, vui vẻ <br>
@@ -88,22 +187,26 @@ Cảm ơn cô vì đã luôn tận tâm dạy dỗ chúng em 💖
 </div>
 </div>
 
-<!-- 🔊 NHẠC -->
+<!-- nhạc -->
 <audio id="music" loop>
 <source src="nhac.mp4" type="audio/mp4">
 </audio>
 
+<!-- nút nhạc -->
 <button id="musicBtn" onclick="toggleMusic()">🔊 Nhạc</button>
 
+<!-- âm thanh mở khóa -->
 <audio id="whoosh">
 <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-1486.mp3">
 </audio>
 
 <script>
 const correct="2404";
+
 let music=document.getElementById("music");
 let btn=document.getElementById("musicBtn");
 
+/* nút nhạc */
 function toggleMusic(){
 if(music.paused){
 music.play();
@@ -114,23 +217,30 @@ btn.innerHTML="🔊 Nhạc";
 }
 }
 
+/* mở thiệp */
 function check(){
 let val=document.getElementById("pin").value;
 
 if(val===correct){
 
-// bật nhạc
-music.volume=0.5;
+music.volume=0.6;
 music.play().catch(()=>{});
 btn.innerHTML="🔇 Tắt";
 
 document.getElementById("whoosh").play();
 
+let flash=document.getElementById("flash");
+flash.style.opacity="1";
+setTimeout(()=>flash.style.opacity="0",300);
+
 setTimeout(()=>{
 document.getElementById("main").style.display="none";
 document.getElementById("secret").style.display="flex";
 
-stars();hearts();balloons();fireworks();
+stars();
+hearts();
+balloons();
+fireworks();
 
 },300);
 
@@ -139,8 +249,9 @@ alert("Sai mã 😢");
 }
 }
 
+/* sao */
 function stars(){
-for(let i=0;i<120;i++){
+for(let i=0;i<140;i++){
 let s=document.createElement("div");
 s.className="star";
 s.style.left=Math.random()*100+"vw";
@@ -149,28 +260,35 @@ document.body.appendChild(s);
 }
 }
 
+/* tim */
 function hearts(){
 setInterval(()=>{
 let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="💖";
 h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(18+Math.random()*20)+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),7000);
-},400);
+},350);
 }
 
+/* bóng bay */
 function balloons(){
 setInterval(()=>{
 let b=document.createElement("div");
 b.className="balloon";
 b.style.left=Math.random()*100+"vw";
-b.style.background=["#ff4da6","#00ffff","#ffd700"][Math.floor(Math.random()*3)];
+
+let colors=["#ff4da6","#00ffff","#ffd700","#66ff66"];
+b.style.background=colors[Math.floor(Math.random()*4)];
+
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),10000);
-},800);
+},900);
 }
 
+/* pháo hoa */
 function fireworks(){
 setInterval(()=>{
 for(let i=0;i<10;i++){
@@ -182,7 +300,7 @@ f.style.top=Math.random()*100+"vh";
 document.body.appendChild(f);
 setTimeout(()=>f.remove(),1300);
 }
-},2000);
+},2200);
 }
 </script>
 
