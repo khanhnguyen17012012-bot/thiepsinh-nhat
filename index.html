@@ -6,186 +6,65 @@
 <title>🎂 HAPPY BIRTHDAY CÔ</title>
 
 <style>
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Segoe UI,sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI,sans-serif;}
+body{overflow:hidden;background:black;color:white;}
 
-body{
-overflow:hidden;
-background:black;
-color:white;
-}
-
-/* flash */
 .flash{
-position:fixed;
-width:100%;
-height:100%;
-background:white;
-opacity:0;
-pointer-events:none;
-z-index:999;
-transition:.3s;
+position:fixed;width:100%;height:100%;
+background:white;opacity:0;z-index:999;transition:.3s;
 }
 
-/* page */
 .page{
-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-flex-direction:column;
-text-align:center;
-background:radial-gradient(circle at center,#1d0036,#000814,#000);
-transition:1s;
+height:100vh;display:flex;justify-content:center;align-items:center;
+flex-direction:column;text-align:center;
+background:radial-gradient(circle,#1d0036,#000814,#000);
 padding:20px;
 }
 
-/* input */
 input{
-padding:14px 20px;
-border:none;
-border-radius:50px;
-font-size:18px;
-text-align:center;
-outline:none;
-width:260px;
+padding:14px;border:none;border-radius:50px;
+font-size:18px;text-align:center;width:260px;
 }
 
 button{
-margin-top:18px;
-padding:14px 28px;
-border:none;
-border-radius:50px;
-font-size:18px;
-font-weight:bold;
-cursor:pointer;
-background:linear-gradient(90deg,#ff00cc,#00ffff);
+margin-top:18px;padding:14px 28px;border:none;
+border-radius:50px;font-size:18px;font-weight:bold;
+cursor:pointer;background:linear-gradient(90deg,#ff00cc,#00ffff);
 color:white;
-box-shadow:0 0 20px rgba(255,255,255,.3);
 }
 
-button:hover{
-transform:scale(1.08);
-}
-
-/* nút nhạc nhỏ */
 #musicBtn{
-position:fixed;
-top:20px;
-right:20px;
-z-index:9999;
-padding:8px 14px;
-font-size:13px;
-border:none;
-border-radius:30px;
-cursor:pointer;
+position:fixed;top:20px;right:20px;
+z-index:9999;border-radius:30px;padding:8px 14px;
 background:linear-gradient(90deg,#ff00cc,#00ffff);
-color:white;
-box-shadow:0 0 10px rgba(255,255,255,.3);
+color:white;cursor:pointer;
 }
 
-/* text */
 .birthday{
-font-size:75px;
-opacity:0;
-transform:scale(.4);
+font-size:70px;
 animation:showUp 2s forwards;
-text-shadow:
-0 0 15px #ff00cc,
-0 0 35px #ff1493,
-0 0 60px #00ffff;
+text-shadow:0 0 20px #ff00cc,0 0 40px #00ffff;
 }
 
 .msg{
-margin-top:25px;
-font-size:24px;
-line-height:1.8;
-max-width:900px;
+margin-top:20px;font-size:22px;line-height:1.8;
 text-shadow:0 0 10px cyan;
 }
 
 @keyframes showUp{
 0%{opacity:0;transform:scale(.2)}
-50%{opacity:1;transform:scale(1.3)}
 100%{opacity:1;transform:scale(1)}
 }
 
-/* stars */
-.star{
-position:fixed;
-width:2px;
-height:2px;
-background:white;
-animation:twinkle 2s infinite alternate;
-}
+/* hiệu ứng */
+.star{position:fixed;width:2px;height:2px;background:white;}
+.heart{position:fixed;bottom:-30px;animation:fly 7s linear;}
+.balloon{position:fixed;bottom:-120px;width:60px;height:75px;border-radius:50%;animation:balloonFly 10s linear;}
+.boom{position:fixed;font-size:24px;animation:explode 1.3s;}
 
-@keyframes twinkle{
-0%{opacity:.2}
-100%{opacity:1}
-}
-
-/* hearts */
-.heart{
-position:fixed;
-bottom:-30px;
-animation:fly 7s linear forwards;
-}
-
-@keyframes fly{
-0%{transform:translateY(0)}
-100%{transform:translateY(-120vh)}
-}
-
-/* balloons */
-.balloon{
-position:fixed;
-bottom:-120px;
-width:60px;
-height:75px;
-border-radius:50%;
-animation:balloonFly 10s linear forwards;
-box-shadow:inset -8px -8px 15px rgba(255,255,255,.25);
-}
-
-.balloon::after{
-content:"";
-position:absolute;
-width:2px;
-height:70px;
-background:white;
-left:50%;
-top:75px;
-}
-
-@keyframes balloonFly{
-0%{transform:translateY(0)}
-100%{transform:translateY(-130vh)}
-}
-
-/* fireworks */
-.boom{
-position:fixed;
-font-size:24px;
-animation:explode 1.3s forwards;
-}
-
-@keyframes explode{
-0%{transform:scale(0);opacity:1}
-100%{transform:scale(4);opacity:0}
-}
-
-/* shake */
-@keyframes shake{
-0%{transform:translateX(0)}
-25%{transform:translateX(-3px)}
-50%{transform:translateX(3px)}
-75%{transform:translateX(-3px)}
-100%{transform:translateX(0)}
-}
+@keyframes fly{100%{transform:translateY(-120vh)}}
+@keyframes balloonFly{100%{transform:translateY(-130vh)}}
+@keyframes explode{100%{transform:scale(4);opacity:0}}
 </style>
 </head>
 
@@ -193,43 +72,35 @@ animation:explode 1.3s forwards;
 
 <div class="flash" id="flash"></div>
 
-<!-- khóa -->
 <div class="page" id="main">
-<h1>🔐 Nhập Mã Bí Mật</h1>
-<br>
-<input type="password" id="pin" placeholder="Nhập mật khẩu...">
+<h1>🔐 Nhập Mã Bí Mật</h1><br>
+<input type="password" id="pin">
 <button onclick="check()">Mở Thiệp 🎁</button>
 </div>
 
-<!-- thiệp -->
 <div class="page" id="secret" style="display:none;">
-<h1 class="birthday" id="title">🎂 HAPPY BIRTHDAY 🎂</h1>
-
+<h1 class="birthday">🎂 HAPPY BIRTHDAY 🎂</h1>
 <div class="msg">
 Chúc mừng sinh nhật cô 🌷<br>
 Chúc cô luôn mạnh khỏe, vui vẻ <br>
 Hạnh phúc và gặp nhiều may mắn <br>
-Cảm ơn cô vì đã luôn tận tâm dạy dỗ chúng em <br>
-Chúc cô dữ gấp 10 nghe hehe!!!
+Cảm ơn cô vì đã luôn tận tâm dạy dỗ chúng em 💖
 </div>
 </div>
 
-<!-- nhạc -->
-<video id="music" loop hidden>
-<source src="nhac.mp4" type="video/mp4">
-</video>
+<!-- 🔊 NHẠC -->
+<audio id="music" loop>
+<source src="nhac.mp4" type="audio/mp4">
+</audio>
 
-<!-- nút nhạc -->
-<button onclick="toggleMusic()" id="musicBtn">🔊 Nhạc</button>
+<button id="musicBtn" onclick="toggleMusic()">🔊 Nhạc</button>
 
-<!-- hiệu ứng âm thanh -->
 <audio id="whoosh">
 <source src="https://assets.mixkit.co/sfx/preview/mixkit-fast-woosh-transition-1486.mp3">
 </audio>
 
 <script>
 const correct="2404";
-
 let music=document.getElementById("music");
 let btn=document.getElementById("musicBtn");
 
@@ -244,16 +115,14 @@ btn.innerHTML="🔊 Nhạc";
 }
 
 function check(){
-let val=document.getElementById("pin").value.toLowerCase();
+let val=document.getElementById("pin").value;
 
 if(val===correct){
 
-music.play();
+// bật nhạc
+music.volume=0.5;
+music.play().catch(()=>{});
 btn.innerHTML="🔇 Tắt";
-
-let flash=document.getElementById("flash");
-flash.style.opacity="1";
-setTimeout(()=>flash.style.opacity="0",300);
 
 document.getElementById("whoosh").play();
 
@@ -261,21 +130,17 @@ setTimeout(()=>{
 document.getElementById("main").style.display="none";
 document.getElementById("secret").style.display="flex";
 
-stars();
-hearts();
-balloons();
-fireworks();
-shakeText();
+stars();hearts();balloons();fireworks();
 
-},400);
+},300);
 
 }else{
-alert("Sai mã rồi 😢");
+alert("Sai mã 😢");
 }
 }
 
 function stars(){
-for(let i=0;i<160;i++){
+for(let i=0;i<120;i++){
 let s=document.createElement("div");
 s.className="star";
 s.style.left=Math.random()*100+"vw";
@@ -290,10 +155,9 @@ let h=document.createElement("div");
 h.className="heart";
 h.innerHTML="💖";
 h.style.left=Math.random()*100+"vw";
-h.style.fontSize=(18+Math.random()*25)+"px";
 document.body.appendChild(h);
 setTimeout(()=>h.remove(),7000);
-},300);
+},400);
 }
 
 function balloons(){
@@ -301,10 +165,7 @@ setInterval(()=>{
 let b=document.createElement("div");
 b.className="balloon";
 b.style.left=Math.random()*100+"vw";
-
-let colors=["#ff4da6","#00ffff","#ffd700","#ff884d","#66ff66"];
-b.style.background=colors[Math.floor(Math.random()*colors.length)];
-
+b.style.background=["#ff4da6","#00ffff","#ffd700"][Math.floor(Math.random()*3)];
 document.body.appendChild(b);
 setTimeout(()=>b.remove(),10000);
 },800);
@@ -312,7 +173,7 @@ setTimeout(()=>b.remove(),10000);
 
 function fireworks(){
 setInterval(()=>{
-for(let i=0;i<12;i++){
+for(let i=0;i<10;i++){
 let f=document.createElement("div");
 f.className="boom";
 f.innerHTML="🎉";
@@ -321,16 +182,7 @@ f.style.top=Math.random()*100+"vh";
 document.body.appendChild(f);
 setTimeout(()=>f.remove(),1300);
 }
-},2200);
-}
-
-function shakeText(){
-let t=document.getElementById("title");
-
-setInterval(()=>{
-t.style.animation="shake .3s";
-setTimeout(()=>t.style.animation="showUp 2s forwards",300);
-},3500);
+},2000);
 }
 </script>
 
